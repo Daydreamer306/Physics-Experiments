@@ -4,6 +4,15 @@
 
 模板参考了 cc98（【学习天地】大二物理实验报告 LaTeX 模版 <https://www.cc98.org/topic/6284556> 复制本链接到浏览器或者打开【CC98】微信小程序查看~）的模板，进行了一些修改和功能性宏包的添加
 
+## 使用方法
+
+复制本仓库根目录下的`template.tex`目录至一个新目录，并在同级文件夹下创建`figures/`文件夹以存放实验报告所需要的
+图片资源。
+
+复制完成之后如有需要请更改`template.tex`中的前两行，以便可以找到模板所在的位置。
+
+如果不方便使用 $\LaTeX$ , 可以在[release](https://github.com/YuNa-Zju/phy_exp/releases/latest)中下载到最新编译的实验报告。
+
 ## 资源整理
 
 [Typst 模板](https://www.cc98.org/topic/6286687)
