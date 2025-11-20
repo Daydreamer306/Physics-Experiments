@@ -1,8 +1,8 @@
-\documentclass[yuxi]{../template/Report}%方括号内写yuxi即生成预习报告\documentclass[yuxi]{../template/Report}
+\documentclass[]{../template/Report}%方括号内写yuxi即生成预习报告
 \settemplatedir{../template/}%设置模板路径
 
 \exname{金属材料杨氏模量的测定} %实验名称
-\extable{} %实验桌号
+\extable{11} %实验桌号
 \instructor{王宙洋} %指导教师
 \class{信工2401} %班级
 \name{姚舜瑜} %姓名
@@ -96,12 +96,82 @@
 
 \begin{fullreportonly}
 \section{原始数据（20分）}
-（将有老师签名的“自备数据记录草稿纸”的扫描或手机拍摄图粘贴在下方，完整保留姓名，学号，教师签字和日期。）
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Y数据.png}
+    \caption{实验原始数据记录表}
+    \label{shuju}
+\end{figure}
 
 \section{结果与分析（60分）}
 \subsection{数据处理与结果（30分）}
-（列出数据表格、选择适合的数据处理方法、写出测量或计算结果。）
+\subsubsection{装置几何参数预测量}
 
+\begin{table}[H]
+    \centering
+    \caption{装置几何参数测量数据}
+    \label{tab:geom_params}
+    \small
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        序号 & $D$/mm & $b$/mm & $L$/mm & $d$/mm \\
+        \hline
+        1 & 1568.0 & 73.50 & 1157.0 & 0.588 \\
+        2 & 1567.0 & 73.58 & 1156.8 & 0.587 \\
+        3 & 1567.1 & 74.48 & 1157.3 & 0.590 \\
+        4 & 1568.0 & 73.62 & 1157.2 & 0.587 \\
+        5 & 1567.5 & 74.20 & 1157.1 & 0.595 \\
+        6 & 1567.7 & 73.80 & 1156.3 & 0.600 \\
+        \hline
+    平均& 1567.55 & 73.86 & 1156.95 & 0.591 \\
+        \hline
+    \end{tabular}
+\end{table}
+\subsubsection{计算与结果}
+取表~\ref{tab:geom_params} 平均值：\(D=1567.55\,\mathrm{mm},\ b=73.86\,\mathrm{mm},\ L=1156.95\,\mathrm{mm},\ d=0.591\,\mathrm{mm}\)。令杭州市重力加速度 \(g=9.7936\,\mathrm{m/s^2}\)。对表~\ref{tab:load_readings} 读数取平均，得
+\[s=\{-10.0,\,-3.0,\,2.6,\,10.0,\,17.1,\,23.95,\,30.8,\,38.45\}\,\mathrm{mm} .\]
+
+(1) 逐差法：按 \(\Delta s_i=\frac{s_{i+4}-s_i}{4}\,(i=1,2,3,4)\) 得
+\[\Delta s=\{6.775,\,6.7375,\,7.0500,\,7.1125\}\,\mathrm{mm/\,kg},\quad \overline{\Delta s}=6.91875\,\mathrm{mm/\,kg}.\]
+代入
+\[\bar{E}=\frac{8DmgL}{\pi d^2 b\,\Delta s}\]
+并令 \(m=1\,\mathrm{kg}\)（逐差法得到的是每千克的平均读数增量），统一至 SI 单位，计算得
+\[\boxed{\bar{E}_{\text{逐差}}\approx 2.532\times10^{11}\,\mathrm{Pa}\ (=253.2\,\mathrm{GPa})}.\]
+
+(2) 线性拟合法：对 \(s\) 与 \(m\) 最小二乘拟合 \(s=k\,m+c\) 得斜率 \(k\approx 6.89643\,\mathrm{mm/\,kg}\)。由
+\[\Delta s=\frac{2D}{b}\,\frac{m g L}{S E}\ \Rightarrow\ E=\frac{2D g L}{b S k},\qquad S=\frac{\pi d^2}{4},\]
+代入同一组几何与物理量得
+\[\boxed{\bar{E}_{\text{拟合}}\approx 2.541\times10^{11}\,\mathrm{Pa}\ (=254.1\,\mathrm{GPa})}.\]
+两种方法结果一致，差异小于 1\%。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.72\textwidth]{figures/Y_fit.png}
+    \caption{$s$–$m$ 散点与线性拟合示意（脚本运行后自动生成）；图注含斜率、截距、$R^2$}
+    \label{fig:Y_fit}
+\end{figure}
+
+\subsubsection{杨氏模量计算数据测量}
+\begin{table}[H]
+    \centering
+    \caption{杨氏模量计算数据测量}
+    \label{tab:load_readings}
+    \small
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        实验序号 & 砝码质量/kg & 增砝码时读数/mm & 减砝码时读数/mm & 平均 \\
+        \hline
+        1 & 1 & -10.0 & -10.0 & -10.0 \\
+        2 & 2 & -2.0 & -4.0 & -3.0 \\
+        3 & 3 & 2.5 & 2.7 & 2.6 \\
+        4 & 4 & 10.0 & 10.0 & 10.0 \\
+        5 & 5 & 17.1 & 17.1 & 17.1 \\
+        6 & 6 & 22.8 & 25.1 & 23.95 \\
+        7 & 7 & 30.2 & 31.4 & 30.8 \\
+        8 & 8 & 38.0 & 38.9 & 38.45 \\
+        \hline
+    \end{tabular}
+\end{table}
 \subsection{误差分析（20分）}
 （运用测量误差、相对误差或不确定度等分析实验结果，写出完整的结果表达式，并分析误差原因。）
 
