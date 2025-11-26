@@ -154,7 +154,7 @@
 \end{table}
 
 \subsubsection{计算与结果}
-取表~\ref{tab:geom_params} 平均值：\(D=1420.00\,\mathrm{mm},\ b=73.86\,\mathrm{mm},\ L=1110.00\,\mathrm{mm},\ d=0.610\,\mathrm{mm}\)。令杭州市重力加速度 \(g=9.7936\,\mathrm{m/s^2}\)。对表~\ref{tab:load_readings} 读数取平均，得
+取表~\ref{tab:geom_params} 平均值：\(D=1420.00\,\mathrm{mm},\ b=73.86\,\mathrm{mm},\ L=1110.00\,\mathrm{mm},\ d=0.610\,\mathrm{mm}\)。经过调查得知杭州市重力加速度 \(g=9.7936\,\mathrm{m/s^2}\)。对表~\ref{tab:load_readings} 读数取平均，得
 \[s=\{-10.0,\,-3.0,\,2.6,\,10.0,\,17.1,\,23.95,\,30.8,\,38.45\}\,\mathrm{mm} .\]
 
 \begin{enumerate}[label=(\arabic*)]
@@ -164,7 +164,7 @@
 \[\Delta s=\{6.775,\,6.7375,\,7.0500,\,7.1125\}\,\mathrm{mm/\,kg},\quad \overline{\Delta s}=6.91875\,\mathrm{mm/\,kg}.\]
 代入
 \[\bar{E}=\frac{8DmgL}{\pi d^2 b\,\Delta s}\]
-并令 \(m=1\,\mathrm{kg}\)（逐差法得到的是每千克的平均读数增量），统一至 SI 单位，计算得
+并令 \(m=1\,\mathrm{kg}\)，统一至 SI 单位，计算得
 \[\boxed{\bar{E}_{\text{逐差}}\approx 2.065\times10^{11}\,\mathrm{Pa} }.\]
 
 \item \textbf{线性拟合法：}
@@ -186,8 +186,8 @@
 
 \subsection{误差分析（20分）}
 根据不确定度传递公式，杨氏模量的相对不确定度为：
-\[ \frac{u(E)}{E} = \sqrt{\left(\frac{u(D)}{D}\right)^2 + \left(\frac{u(L)}{L}\right)^2 + \left(\frac{u(b)}{b}\right)^2 + \left(\frac{2u(d)}{d}\right)^2 + \left(\frac{u(k)}{k}\right)^2} \]
-
+\[ \frac{u(E)}{E} = \sqrt{\left(\frac{u(D)}{D}\right)^2 + \left(\frac{u(L)}{L}\right)^2 + \left(\frac{u(b)}{b}\right)^2 + \left(\frac{2u(d)}{d}\right)^2 + \left(\frac{u(\Delta s)}{\Delta s}\right)^2 + \left(\frac{u(\Delta m)}{\Delta m}\right)^2} \]
+若采用线性拟合法，则不确定度中 $\frac{u(\Delta s)}{\Delta s}$ 项改为 $\frac{u(k)}{k}$。
 \subsubsection{直接测量量的不确定度}
 对于长度测量量 $x \in \{D, b, L, d\}$，其不确定度由A类不确定度（统计误差）和B类不确定度（仪器误差）合成：
 \[ u(x) = \sqrt{u_A^2(x) + u_B^2(x)} = \sqrt{\frac{S_x^2}{n} + \frac{\Delta_{\text{仪}}^2}{3}} \]
@@ -206,31 +206,50 @@
         $b$ / mm & 73.86 & 0.15 & 0.01 & 0.15 & 0.20\% \\
         $L$ / mm & 1110.0 & 0.12 & 0.29 & 0.31 & 0.03\% \\
         $d$ / mm & 0.610 & 0.0006 & 0.0023 & 0.0024 & 0.39\% \\
+        $\Delta s$ / mm & 6.92 & 0.10 & 0.29 & 0.31 & 4.5\% \\
         \bottomrule
     \end{tabular}
 \end{table}
+注：表中 $\Delta s$ 数据基于逐差法计算。若采用线性拟合法，其不确定度由斜率 $k$ 决定。
 
 \subsubsection{间接测量量的不确定度}
-对于斜率 $k$（即 $\Delta s / \Delta m$），由线性拟合得到 $k \approx 6.896$ mm/kg。
-拟合的标准误差（A类）为 $u_A(k) \approx 0.077$ mm/kg。
-相对不确定度 $\frac{u(k)}{k} \approx 1.12\%$。
+\begin{enumerate}
+    \item \textbf{斜率 $k$（对应 $\Delta s$）}：采用线性拟合法得到的斜率 $k \approx 6.896$ mm/kg。拟合的标准误差（A类）为 $u_A(k) \approx 0.077$ mm/kg。相对不确定度 $\frac{u(\Delta s)}{\Delta s} \approx \frac{u(k)}{k} \approx 1.12\%$。
+    \item \textbf{质量增量 $\Delta m$}：砝码标称质量 $1.000$ kg，仪器误差 $\Delta_{\text{仪}} = 500$ mg $= 0.5$ g。
+    \[ u(\Delta m) = \frac{\Delta_{\text{仪}}}{\sqrt{3}} = \frac{0.5}{\sqrt{3}} \approx 0.29 \text{ g} \]
+    相对不确定度 $\frac{u(\Delta m)}{\Delta m} = \frac{0.29}{1000} \approx 0.03\%$。
+\end{enumerate}
 
 \subsubsection{合成不确定度}
-代入各相对分量：
-\[ u_r(E) = \sqrt{0.02\%^2 + 0.03\%^2 + 0.20\%^2 + (2\times 0.39\%)^2 + 1.12\%^2} \approx 1.38\% \]
+根据数据处理方法的不同，分别计算合成不确定度：
+
+\paragraph{1. 基于线性拟合法}
+利用 $s-m$ 曲线斜率 $k$，其相对不确定度较小（$1.12\%$）。
+\[ u_r(E)_1 = \sqrt{0.02\%^2 + 0.03\%^2 + 0.20\%^2 + (2\times 0.39\%)^2 + 1.12\%^2 + 0.03\%^2} \approx 1.38\% \]
+\[ u(E)_1 = 207.2 \times 1.38\% \approx 2.9 \text{ GPa} \]
 最终结果：
-\[ E = \bar{E}_{\text{拟合}} \pm u(E) = (207.4 \pm 2.9) \times 10^9 \, \text{Pa} = 207 \pm 3 \, \text{GPa} \]
+$$\boxed{E_1 = (207 \pm 3) \text{ GPa}}$$
+
+\paragraph{2. 基于逐差法}
+利用平均伸长量 $\Delta s$，受单次读数仪器误差影响较大（相对不确定度 $4.5\%$）。
+\[ u_r(E)_2 = \sqrt{0.02\%^2 + 0.03\%^2 + 0.20\%^2 + (2\times 0.39\%)^2 + 4.5\%^2 + 0.03\%^2} \approx 4.6\% \]
+\[ u(E)_2 = 206.5 \times 4.6\% \approx 9.5 \text{ GPa} \]
+最终结果：
+$$\boxed{E_2 = (206 \pm 10) \text{ GPa}}$$
+
+\paragraph{综上所述：}比较可知，线性拟合法结果更为精确，个别读数误差造成的影响更小，因此我们最终认为该铁丝的杨氏模量为
+$$\boxed{E = (207 \pm 3) \text{ GPa}}.$$
 
 \subsubsection{误差来源分析}
 \begin{enumerate}
     \item \textbf{直径 $d$ 的测量误差}：$d$ 在公式中为平方项，且数值小，其相对误差放大2倍后对结果影响较大。金属丝可能存在粗细不均。
     \item \textbf{光杠杆常数测量}：$b$ 的测量需通过压痕法，存在操作误差；$D$ 的测量受卷尺弯曲和视差影响。
-    \item \textbf{读数误差}：金属丝受力后会有微小摆动，导致望远镜读数波动；十字叉丝与像的视差未完全消除也会引入误差。
-    \item \textbf{模型近似误差}：公式推导中使用了 $\tan \theta \approx \theta$ 的近似，虽然在微小形变下成立，但仍有微小系统误差。
+    \item \textbf{$\Delta s$ 的读数误差}：添加砝码时容易晃动，让$\Delta s$ 读数波动，且读数时易受主观因素干扰。
 \end{enumerate}
 
 \subsection{实验探讨（10分）}
-本实验通过光杠杆法成功测定了钢丝的杨氏模量。实验中重点掌握了光路调节技巧，特别是消除视差和共轴调节。利用逐差法和线性拟合法处理数据，有效减小了随机误差。最终测得杨氏模量约为 207 GPa，与钢的理论值（约 200-210 GPa）吻合较好，验证了胡克定律在弹性限度内的适用性。
+本实验通过光杠杆法成功测定了钢丝的杨氏模量。结果与常见钢材的杨氏模量相符。在理论层面上，我学会了如何利用光学放大原理测量微小形变，并理解了杨氏模量的物理意义。
+在实验操作中，我掌握了光杠杆装置的调节技巧，学会了逐差法和线性拟合法的数据处理方法，并进行了不确定度分析。
 
 \section{思考题（10分）}
 \subsection{伸长法测量钢丝的杨氏弹性模量中需要测量哪些物理量？分别用什么仪器测量？应估读到哪一位？}
