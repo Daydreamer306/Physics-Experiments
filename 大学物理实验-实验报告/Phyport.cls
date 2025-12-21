@@ -2,7 +2,7 @@
 \LoadClass{ctexart}
 \RequirePackage{graphicx, xcolor, tikz}
 \RequirePackage{geometry, titlesec, fancyhdr}
-\RequirePackage{listings, cncolours}
+\RequirePackage{listings}
 \RequirePackage{indentfirst, enumitem, zhnumber}
 \RequirePackage{fontspec, stackengine}
 \RequirePackage{silence}
@@ -37,10 +37,10 @@
 \titleformat*{\subsubsection}{\normalsize}
 
 % 代码格式和颜色定义
-\colorlet{keyword}{松花绿}
-\colorlet{comment}{漆黑!50}
-\colorlet{emph1}{靛蓝}
-\colorlet{emph2}{琥珀}
+\definecolor{keyword}{RGB}{96,154,89}
+\definecolor{comment}{RGB}{0,0,0}
+\definecolor{emph1}{RGB}{25,25,112}
+\definecolor{emph2}{RGB}{255,165,0}
 \lstset{
   frame=tb,
   framerule=0.5pt,
